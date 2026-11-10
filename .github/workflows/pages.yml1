@@ -1,0 +1,21 @@
+name: Publish game
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: github-pages
+    steps:
+      - uses: actions/checkout@v4
+      - run: unzip -q hechengdaminghan-github-pages.zip -d game
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: game
+      - uses: actions/deploy-pages@v4
